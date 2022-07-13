@@ -12,6 +12,8 @@ public protocol GlobalDataStore: AutoMockable {
     // HTTP requests can be paused to avoid spamming the API too hard.
     // This Date is when a pause is able to be lifted.
     var httpRequestsPauseEnds: Date? { get set }
+    // used to identify a device's events to be able to debug the SDK using the Customer.io web app.
+    var debuggerUID: String? { get set }
 }
 
 // sourcery: InjectRegister = "GlobalDataStore"
@@ -49,6 +51,15 @@ public class CioGlobalDataStore: GlobalDataStore {
         }
         set {
             keyValueStorage.setDate(newValue, forKey: .httpRequestsPauseEnds)
+        }
+    }
+
+    public var debuggerUID: String? {
+        get {
+            keyValueStorage.string(.debuggerUID)
+        }
+        set {
+            keyValueStorage.setString(newValue, forKey: .debuggerUID)
         }
     }
 

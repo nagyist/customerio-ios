@@ -234,6 +234,12 @@ public class CustomerIO: CustomerIOInstance {
 
         diGraph.logger.info("Customer.io SDK \(SdkVersion.version) initialized successfully.")
 
+        let hasGeneratedDebuggerUID = globalData.debuggerUID != nil
+        if !hasGeneratedDebuggerUID {
+            let newDebuggerUID = String.randomDebuggerId()
+            globalData.debuggerUID = newDebuggerUID
+        }
+
         // Register Tracking module hooks now that the module is being initialized.
         let hooksManager = diGraph.hooksManager
         hooksManager.add(key: .tracking, provider: TrackingModuleHookProvider(siteId: siteId))

@@ -156,6 +156,9 @@ internal class CustomerIOImplementation: CustomerIOInstance {
     }
 
     public func identify(identifier: String, body: [String: Any]) {
+        var body = body
+        body["_cio_debugger_uid"] = DIGraph.getInstance(siteId: siteId!).globalDataStore.debuggerUID
+
         identify(identifier: identifier, body: StringAnyEncodable(body))
     }
 
@@ -184,6 +187,9 @@ internal class CustomerIOImplementation: CustomerIOInstance {
     }
 
     public func track(name: String, data: [String: Any]) {
+        var data = data
+        data["_cio_debugger_uid"] = DIGraph.getInstance(siteId: siteId!).globalDataStore.debuggerUID
+
         track(name: name, data: StringAnyEncodable(data))
     }
 
