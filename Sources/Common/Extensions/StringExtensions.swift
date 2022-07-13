@@ -27,7 +27,7 @@ public extension String {
         String((0 ..< length).map { _ in abcLetters.randomElement()! })
     }
 
-    static func randomDebuggerId(): String {
+    static func randomDebuggerId() -> String {
         "\(String.random(length: 3))-\(String.random(length: 3))-\(String.random(length: 3))"
     }
 

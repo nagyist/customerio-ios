@@ -901,6 +901,42 @@ public class GlobalDataStoreMock: GlobalDataStore, Mock {
         }
     }
 
+    /**
+     When setter of the property called, the value given to setter is set here.
+     When the getter of the property called, the value set here will be returned. Your chance to mock the property.
+     */
+    public var underlyingDebuggerUID: String?
+    /// `true` if the getter or setter of property is called at least once.
+    public var debuggerUIDCalled: Bool {
+        debuggerUIDGetCalled || debuggerUIDSetCalled
+    }
+
+    /// `true` if the getter called on the property at least once.
+    public var debuggerUIDGetCalled: Bool {
+        debuggerUIDGetCallsCount > 0
+    }
+
+    public var debuggerUIDGetCallsCount = 0
+    /// `true` if the setter called on the property at least once.
+    public var debuggerUIDSetCalled: Bool {
+        debuggerUIDSetCallsCount > 0
+    }
+
+    public var debuggerUIDSetCallsCount = 0
+    /// The mocked property with a getter and setter.
+    public var debuggerUID: String? {
+        get {
+            mockCalled = true
+            debuggerUIDGetCallsCount += 1
+            return underlyingDebuggerUID
+        }
+        set(value) {
+            mockCalled = true
+            debuggerUIDSetCallsCount += 1
+            underlyingDebuggerUID = value
+        }
+    }
+
     public func resetMock() {
         sharedInstanceSiteId = nil
         sharedInstanceSiteIdGetCallsCount = 0
@@ -913,6 +949,9 @@ public class GlobalDataStoreMock: GlobalDataStore, Mock {
         httpRequestsPauseEnds = nil
         httpRequestsPauseEndsGetCallsCount = 0
         httpRequestsPauseEndsSetCallsCount = 0
+        debuggerUID = nil
+        debuggerUIDGetCallsCount = 0
+        debuggerUIDSetCallsCount = 0
         appendSiteIdCallsCount = 0
         appendSiteIdReceivedArguments = nil
         appendSiteIdReceivedInvocations = []
