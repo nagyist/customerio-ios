@@ -145,7 +145,8 @@ extension DIGraph {
     }
 
     public var sharedHooksManager: HooksManager {
-        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1 shared one or you will get a crash when trying
+        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1
+        // shared one or you will get a crash when trying
         // to call DispatchQueue.sync{} while already inside another DispatchQueue.sync{} call.
         DispatchQueue(label: "DIGraph_HooksManager_singleton_access").sync {
             if let overridenDep = self.overrides[String(describing: HooksManager.self)] {
@@ -215,7 +216,8 @@ extension DIGraph {
     }
 
     public var sharedQueueRequestManager: QueueRequestManager {
-        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1 shared one or you will get a crash when trying
+        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1
+        // shared one or you will get a crash when trying
         // to call DispatchQueue.sync{} while already inside another DispatchQueue.sync{} call.
         DispatchQueue(label: "DIGraph_QueueRequestManager_singleton_access").sync {
             if let overridenDep = self.overrides[String(describing: QueueRequestManager.self)] {
@@ -290,7 +292,8 @@ extension DIGraph {
     }
 
     internal var sharedSingleScheduleTimer: SingleScheduleTimer {
-        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1 shared one or you will get a crash when trying
+        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1
+        // shared one or you will get a crash when trying
         // to call DispatchQueue.sync{} while already inside another DispatchQueue.sync{} call.
         DispatchQueue(label: "DIGraph_SingleScheduleTimer_singleton_access").sync {
             if let overridenDep = self.overrides[String(describing: SingleScheduleTimer.self)] {
@@ -385,7 +388,8 @@ extension DIGraph {
     }
 
     public var sharedActiveWorkspacesManager: ActiveWorkspacesManager {
-        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1 shared one or you will get a crash when trying
+        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1
+        // shared one or you will get a crash when trying
         // to call DispatchQueue.sync{} while already inside another DispatchQueue.sync{} call.
         DispatchQueue(label: "DIGraph_ActiveWorkspacesManager_singleton_access").sync {
             if let overridenDep = self.overrides[String(describing: ActiveWorkspacesManager.self)] {
@@ -412,7 +416,8 @@ extension DIGraph {
     }
 
     public var sharedSdkConfigStore: SdkConfigStore {
-        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1 shared one or you will get a crash when trying
+        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1
+        // shared one or you will get a crash when trying
         // to call DispatchQueue.sync{} while already inside another DispatchQueue.sync{} call.
         DispatchQueue(label: "DIGraph_SdkConfigStore_singleton_access").sync {
             if let overridenDep = self.overrides[String(describing: SdkConfigStore.self)] {
@@ -450,7 +455,8 @@ extension DIGraph {
     }
 
     public var sharedLockManager: LockManager {
-        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1 shared one or you will get a crash when trying
+        // Use a DispatchQueue to make singleton thread safe. You must create unique dispatchqueues instead of using 1
+        // shared one or you will get a crash when trying
         // to call DispatchQueue.sync{} while already inside another DispatchQueue.sync{} call.
         DispatchQueue(label: "DIGraph_LockManager_singleton_access").sync {
             if let overridenDep = self.overrides[String(describing: LockManager.self)] {

@@ -207,9 +207,11 @@ internal class CustomerIOImplementation: CustomerIOInstance {
 }
 
 extension CustomerIOImplementation {
-    private func trackEvent<RequestBody: Encodable>(type: EventType,
-                                                    name: String,
-                                                    data: RequestBody?) {
+    private func trackEvent<RequestBody: Encodable>(
+        type: EventType,
+        name: String,
+        data: RequestBody?
+    ) {
         let eventTypeDescription = (type == .screen) ? "track screen view event" : "track event"
 
         logger.info("\(eventTypeDescription) \(name)")

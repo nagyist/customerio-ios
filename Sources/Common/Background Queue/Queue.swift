@@ -105,8 +105,12 @@ public class CioQueue: Queue {
         self.queueTimer = queueTimer
     }
 
-    public func addTask<T: Codable>(type: String, data: T, groupStart: QueueTaskGroup?,
-                                    blockingGroups: [QueueTaskGroup]?) -> (success: Bool, queueStatus: QueueStatus) {
+    public func addTask<T: Codable>(
+        type: String,
+        data: T,
+        groupStart: QueueTaskGroup?,
+        blockingGroups: [QueueTaskGroup]?
+    ) -> (success: Bool, queueStatus: QueueStatus) {
         logger.info("adding queue task \(type)")
 
         guard let data = jsonAdapter.toJson(data, encoder: nil) else {

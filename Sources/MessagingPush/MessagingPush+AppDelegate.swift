@@ -55,7 +55,8 @@ extension MessagingPushImplementation {
     ) -> Bool {
         guard let pushContent = userNotificationCenter(center, didReceive: response) else {
             // push did not come from CIO
-            // Do not call completionHandler() because push did not come from CIO. Another service might have sent it so allow another SDK
+            // Do not call completionHandler() because push did not come from CIO. Another service might have sent it so
+            // allow another SDK
             // to call the completionHandler()
             return false
         }
@@ -68,7 +69,8 @@ extension MessagingPushImplementation {
         default: break
         }
 
-        // Push came from CIO and the SDK handled it. Therefore, call the completionHandler for the customer and return true telling them that the SDK handled the push for them.
+        // Push came from CIO and the SDK handled it. Therefore, call the completionHandler for the customer and return
+        // true telling them that the SDK handled the push for them.
         completionHandler()
         return true
     }

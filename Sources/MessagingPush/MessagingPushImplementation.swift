@@ -183,7 +183,8 @@ internal class MessagingPushImplementation: MessagingPushInstance {
         trackMetric(deliveryID: deliveryID, event: event, deviceToken: deviceToken)
     }
 
-    // There are files that are created just for displaying a rich push. After a push is interacted with, those files are no longer needed.
+    // There are files that are created just for displaying a rich push. After a push is interacted with, those files
+    // are no longer needed.
     // This function's job is to cleanup after a push is no longer being displayed.
     internal func cleanupAfterPushInteractedWith(pushContent: CustomerIOParsedPushPayload) {
         pushContent.cioAttachments.forEach { attachment in
