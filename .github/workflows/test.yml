@@ -154,4 +154,39 @@ jobs:
         fail_on_failure: true 
         require_tests: true 
       if: ${{ always() }} # if running tests fails, we still want to parse the test results     
+    
+  sample-app-build:
+    runs-on: ubuntu-latest
+    name: Create automated build of sample app 
+    if: ${{ github.event_name == 'push' }} 
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/github-script@v6
+      name: Begin building sample app 
+      with:
+        # workflows can only be triggered by an account with write access to a repository so we need a github token that can write to remote habits repository. 
+        # for security reasons, make sure that github actions does not run for public forks (from outside contributors): https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#configuring-required-approval-for-workflows-from-public-forks
+        # so public cannot access secret since this action runs on each pull request made by anyone. 
+        github-token: ${{ secrets.WRITE_ACCESS_BOT_TOKEN_REMOTE_HABITS }} 
+        script: |
+          octokit.rest.actions.createWorkflowDispatch({
+            owner: 'customerio',
+            repo: 'RemoteHabits-iOS',
+            workflow_id: 'automated-sdk-build',
+            ref: 'main',
+            inputs: {
+              sdk_branch_name: context.github.ref_name,
+              sdk_version_name: context.github.sha // git commit hash can be the version name used by Swift Package Manager to install SDK into app. 
+            }
+          })
+    - uses: actions/github-script@v6
+      name: Pause pull request while waiting for build 
+      with:
+        script: |
+          octokit.rest.checks.create({
+            owner: 'customerio',
+            repo: 'customerio-ios',
+            name: ''
+            status: 'in_progress'
+          })
       
